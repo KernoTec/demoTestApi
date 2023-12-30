@@ -9,7 +9,7 @@ spring:
   # JPA
   jpa:
 
-    show-sql: false
+    show-sql: true
     hibernate:
       ddl-auto: update
       naming:
@@ -19,15 +19,15 @@ spring:
 
   # DATASOURCE
   datasource:
-    url: ${DB_URL:jdbc:postgresql://127.0.0.1:5411/kbi_test_db}
-    username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:postgres}
+    url: jdbc:postgresql://127.0.0.1:5432/kbi_test_db
+    username: postgres
+    password: 112711
 
 
 # LOGGING
 logging:
   level:
-    root: ${LOGGING_LEVEL:INFO}
+    root: INFO
 
 server:
-  port: ${PORT_SERVER:8085}
+  port: 8085
