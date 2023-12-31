@@ -1,7 +1,6 @@
 package com.kernotec.test.business.classDocument.repository;
 
 import com.kernotec.test.business.classDocument.entity.ClassDocument;
-import com.kernotec.test.jpa.entity.TestDb;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

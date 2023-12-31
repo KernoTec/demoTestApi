@@ -12,7 +12,7 @@ import java.util.Properties;
 public class CustomUtil {
 
     private static final String PERSISTENCE_ERROR_MSG = "persistence_messages_errors.properties";
-    private static Map<String, Properties> props = new HashMap<>();
+    private static Map<String, Properties> props = new HashMap<String, Properties>();
 
     public static String getErrorPersistenceMsgsProperty(String key, String... args) {
         Properties prop = props.get(PERSISTENCE_ERROR_MSG);

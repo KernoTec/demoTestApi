@@ -1,6 +1,5 @@
 package com.kernotec.test.business.gender.service;
 
-import com.kernotec.test.business.classDocument.entity.ClassDocument;
 import com.kernotec.test.business.gender.entity.Gender;
 import com.kernotec.test.crud.CrudService;
 

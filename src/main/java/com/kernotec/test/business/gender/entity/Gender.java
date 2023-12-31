@@ -7,19 +7,16 @@ import jakarta.persistence.UniqueConstraint;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Column;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 import java.util.UUID;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "gender", uniqueConstraints = { @UniqueConstraint(columnNames = { "code" }) })
 public class Gender implements Serializable {
 
-    @Id
+    private static final long serialVersionUID = -1233631192956366396L;
+
+	@Id
     @GeneratedValue
     @Column(name = "id", nullable = false, columnDefinition = "uuid DEFAULT uuid_generate_v4()")
     private UUID id;
@@ -34,4 +31,20 @@ public class Gender implements Serializable {
         this.code = code;
         this.name = name;
     }
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}    
 }

@@ -47,7 +47,7 @@ public class ClientController implements CrudController<ClientDto> {
     @Override
     public List<ClientDto> findAll() {
         try {
-            List<ClientDto> dtoList = new ArrayList<>();
+            List<ClientDto> dtoList = new ArrayList<ClientDto>();
             for (Client entity : service.findAll()) {
                 dtoList.add(mapper.toDto(entity));
             }

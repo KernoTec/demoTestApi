@@ -1,11 +1,5 @@
 package com.kernotec.test.business.gender.dto;
 
-import jakarta.persistence.Column;
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class GenderDto {
 
     private String code;
@@ -16,4 +10,20 @@ public class GenderDto {
         this.code = code;
         this.name = name;
     }
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}    
 }

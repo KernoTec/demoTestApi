@@ -8,13 +8,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClientMapper implements IMapper<Client, ClientDto> {
 
-    @Override
-    public ClientDto toDto(Client entity) {
-        return new ClientDto(entity.getName(), entity.getSurname1(), entity.getSurname2(), entity.getClassDocumentId(), entity.getNumberDocument(), entity.getBirthday(), entity.getGenderId());
-    }
+	@Override
+	public ClientDto toDto(Client entity) {
+		return new ClientDto(entity.getName(), entity.getSurname1(), entity.getSurname2(), entity.getClassDocumentId(),
+				entity.getNumberDocument(), entity.getBirthday(), entity.getGenderId(), entity.getStatus());
+	}
 
-    @Override
-    public Client toEntity(ClientDto dto, boolean isNew) {
-        return new Client(dto.getName(), dto.getSurname1(), dto.getSurname2(), dto.getClassDocumentId(), dto.getNumberDocument(), dto.getBirthday(), dto.getGenderId());
-    }
+	@Override
+	public Client toEntity(ClientDto dto, boolean isNew) {
+		return new Client(dto.getName(), dto.getSurname1(), dto.getSurname2(), dto.getClassDocumentId(),
+				dto.getNumberDocument(), dto.getBirthday(), dto.getGenderId(), dto.getStatus());
+	}
 }
