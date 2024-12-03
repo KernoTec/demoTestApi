@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 @CrossOrigin
 @RestController
@@ -26,6 +27,11 @@ public class AsignadosController {
     @PostMapping
     public ResponseEntity<DefaultResponseDTO<Asignados>> save(@RequestBody AsignadosRequestDTO dto) {
         return ResponseEntity.ok(asignadosService.save(dto));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DefaultResponseDTO<List<Vehiculos>>> getAllByClientId(@PathVariable UUID id) {
+        return ResponseEntity.ok(asignadosService.findAllByClienteId(id));
     }
 
 }

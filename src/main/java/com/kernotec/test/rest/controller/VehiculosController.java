@@ -30,11 +30,6 @@ public class VehiculosController {
         return ResponseEntity.ok(vehiculosService.getAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<DefaultResponseDTO<List<Vehiculos>>> getAllByCostumer(@PathVariable UUID id) {
-        return ResponseEntity.ok(vehiculosService.getAllByCostumer(id));
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<DefaultResponseDTO<Vehiculos>> update(@PathVariable UUID id, @RequestBody VehiculoRequestDTO dto) {
         return ResponseEntity.ok(vehiculosService.update(id, dto));

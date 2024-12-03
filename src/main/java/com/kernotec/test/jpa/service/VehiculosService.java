@@ -44,23 +44,6 @@ public class VehiculosService implements IVehiculosService {
                 .build();
     }
 
-    public DefaultResponseDTO<List<Vehiculos>> getAllByCostumer(UUID id) {
-        List<Asignados> asignados = asignadosService.findAllByClienteId(id);
-        List<Vehiculos> vehiculos = vehiculosRepository.findAll();
-        List<Vehiculos> vehiculosAsignados = new ArrayList<>();
-        asignados.forEach(x -> {
-            Optional<Vehiculos> vehiculosFinded = vehiculos.stream()
-                    .filter(vehiculos1 -> vehiculos1.getId().equals(x.getVehiculoId()))
-                    .findFirst();
-            vehiculosAsignados.add(vehiculosFinded.get());
-        });
-        return DefaultResponseDTO.<List<Vehiculos>>builder()
-                .httpStatus(HttpStatus.OK)
-                .message("Vehiculos obtenidos correctamente.")
-                .response(vehiculosAsignados)
-                .build();
-    }
-
     public Vehiculos getById(UUID id) {
         Optional<Vehiculos> vehiculos = vehiculosRepository.findById(id);
         if(vehiculos.isEmpty()) {

@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -26,9 +27,22 @@ public class AsignadosService implements IAsignadosService {
     @Autowired
     private AsignadosRepository asignadosRepository;
 
-    public List<Asignados> findAllByClienteId(UUID id) {
-        List<Asignados> asignados = asignadosRepository.findAllByClienteId(id);
-        return asignados;
+    @Autowired
+    private VehiculosRepository vehiculosRepository;
+
+
+    @Override
+    public DefaultResponseDTO<List<Vehiculos>> findAllByClienteId(UUID id) {
+        List<Asignados> asignadosList = asignadosRepository.findAllByClienteId(id);
+        List<Vehiculos> vehiculosList = new ArrayList<>();
+        asignadosList.forEach(asignado -> {
+            vehiculosList.add(vehiculosRepository.findById(asignado.getVehiculoId()).orElseThrow(EntityNotFoundException::new));
+        });
+        return DefaultResponseDTO.<List<Vehiculos>>builder()
+                .httpStatus(HttpStatus.OK)
+                .message("Vehiculos asignados obtenidos correctamente.")
+                .response(vehiculosList)
+                .build();
     }
 
     public DefaultResponseDTO<Asignados> save(AsignadosRequestDTO dto) {
@@ -40,12 +54,28 @@ public class AsignadosService implements IAsignadosService {
                 .build();
     }
 
-    public Asignados getById(UUID id) {
-        Optional<Asignados> asignados = asignadosRepository.findById(id);
-        if(asignados.isEmpty()) {
-            throw new EntityNotFoundException(Clientes.class.getSimpleName());
+    public DefaultResponseDTO<List<Vehiculos>> getById(UUID id) {
+        List<Asignados> asignados = asignadosRepository.findAllByClienteId(id);
+        List<Vehiculos> vehiculosAsignados = new ArrayList<>();
+        if(asignados.size()>0){
+            List<Vehiculos> vehiculos = vehiculosRepository.findAll();
+            asignados.forEach(x -> {
+                vehiculosAsignados.add(getByIdVehiculo(x.getVehiculoId()));
+            });
         }
-        return asignados.get();
+        return DefaultResponseDTO.<List<Vehiculos>>builder()
+                .httpStatus(HttpStatus.CREATED)
+                .message("Vehiculos asignados obtenidos correctamente.")
+                .response(vehiculosAsignados)
+                .build();
+    }
+
+    public Vehiculos getByIdVehiculo(UUID id) {
+        Optional<Vehiculos> vehiculos = vehiculosRepository.findById(id);
+        if(vehiculos.isEmpty()) {
+            throw new EntityNotFoundException(Vehiculos.class.toString());
+        }
+        return vehiculos.get();
     }
 
 }

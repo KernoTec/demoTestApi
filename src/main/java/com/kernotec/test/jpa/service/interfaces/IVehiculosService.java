@@ -10,7 +10,6 @@ import java.util.UUID;
 public interface IVehiculosService {
     DefaultResponseDTO<Vehiculos> save(VehiculoRequestDTO dto);
     DefaultResponseDTO<List<Vehiculos>> getAll();
-    DefaultResponseDTO<List<Vehiculos>> getAllByCostumer(UUID id);
     DefaultResponseDTO<Vehiculos> update(UUID id, VehiculoRequestDTO dto);
     DefaultResponseDTO<Vehiculos> delete(UUID id);
 }
